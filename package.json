@@ -1,0 +1,81 @@
+{
+  "name": "mediforge",
+  "version": "1.0.0",
+  "description": "AI-Powered Healthcare Application Generator - HIPAA-compliant, FHIR-native healthcare app builder",
+  "author": "MediForge Team",
+  "license": "MIT",
+  "keywords": [
+    "healthcare",
+    "medical",
+    "HIPAA",
+    "FHIR",
+    "EHR",
+    "telemedicine",
+    "AI",
+    "code-generation",
+    "claude",
+    "nextjs",
+    "fastapi"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev:web\" \"npm run dev:api\"",
+    "dev:web": "cd apps/web && npm run dev",
+    "dev:api": "cd apps/api && python main.py",
+    "build": "npm run build:web && npm run build:api",
+    "build:web": "cd apps/web && npm run build",
+    "build:api": "cd apps/api && pip install -r requirements.txt",
+    "start": "npm run start:web & npm run start:api",
+    "start:web": "cd apps/web && npm start",
+    "start:api": "cd apps/api && uvicorn main:app --host 0.0.0.0 --port 8080",
+    "healthcare:setup": "node scripts/setup-healthcare.js",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest --config jest.unit.config.js",
+    "test:integration": "jest --config jest.integration.config.js",
+    "test:compliance": "npm run test:hipaa && npm run test:security",
+    "test:hipaa": "cd apps/api && python -m healthcare.tests.test_hipaa",
+    "test:security": "cd apps/web && npm run test:security",
+    "audit:security": "npm audit && cd apps/api && safety check",
+    "db:migrate": "cd apps/api && alembic upgrade head",
+    "db:seed": "cd apps/api && python scripts/seed_healthcare.py",
+    "deploy": "npm run deploy:vercel && npm run deploy:supabase",
+    "deploy:vercel": "vercel --prod",
+    "deploy:supabase": "supabase db push",
+    "clean": "npm run clean:deps && npm run clean:build",
+    "clean:deps": "rm -rf node_modules apps/web/node_modules apps/api/.venv",
+    "clean:build": "rm -rf apps/web/.next apps/web/out apps/api/__pycache__",
+    "postinstall": "npm run install:web && npm run install:api",
+    "install:web": "cd apps/web && npm install",
+    "install:api": "cd apps/api && python -m venv .venv && pip install -r requirements.txt",
+    "lint": "npm run lint:web && npm run lint:api",
+    "lint:web": "cd apps/web && eslint . --ext .ts,.tsx",
+    "lint:api": "cd apps/api && pylint healthcare/",
+    "format": "npm run format:web && npm run format:api",
+    "format:web": "cd apps/web && prettier --write '**/*.{ts,tsx,json,md}'",
+    "format:api": "cd apps/api && black ."
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.3.1",
+    "cross-env": "^7.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.3",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2",
+    "vercel": "^32.5.0",
+    "supabase": "^1.110.1"
+  }
+}
