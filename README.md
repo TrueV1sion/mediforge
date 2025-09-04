@@ -161,29 +161,11 @@ npm run test:hipaa
 npm run audit:security
 ```
 
-## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-MediForge is MIT licensed. See [LICENSE](LICENSE) for details.
-
-## 🏢 Enterprise Support
-
-For enterprise deployments and support:
-- Email: enterprise@mediforge.ai
-- Website: https://mediforge.ai/enterprise
 
 ## 🙏 Acknowledgments
 
-- Built on [Laudable](https://github.com/TrueV1sion/Laudable) foundation
+- Built by Jared Peck
 - Powered by [Claude Code](https://anthropic.com) AI
 - UI components from [shadcn/ui](https://ui.shadcn.com)
 - FHIR resources from [HL7](https://www.hl7.org/fhir/)
